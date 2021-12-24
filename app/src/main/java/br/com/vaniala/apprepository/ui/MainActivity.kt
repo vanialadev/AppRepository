@@ -6,13 +6,17 @@ import android.util.Log
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
 import br.com.vaniala.apprepository.R
+import br.com.vaniala.apprepository.core.createDialog
+import br.com.vaniala.apprepository.core.createProgressDialog
 import br.com.vaniala.apprepository.core.hideSoftKeyboard
 import br.com.vaniala.apprepository.databinding.ActivityMainBinding
+import br.com.vaniala.apprepository.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val viewModel by viewModel<MainViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +24,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+        viewModel.repos.observe(this) {
+
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
